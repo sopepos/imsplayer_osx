@@ -5,11 +5,11 @@
 #define VERT_DEFAULT	8
 #define BAND_DEFAULT	8
 #define LEDS_DEFAULT	8
-#define BAND_PERCENT	10	// 10% of Max Range (Auto Decrease)
+#define BAND_PERCENT	30	// 10% of Max Range (Auto Decrease)
 #define GRID_INCREASEBY	5	// Increase Grid color based on Background color
 #define FALL_INCREASEBY 60	// Increase Falloff color based on Background
 #define DELAY_10MS		10
-#define DEFAULT_SPEED	10
+#define DEFAULT_SPEED	1
 
 // Peak Meter Control styles
 #define PM_HORIZONTAL	0x0000	// Horizontal band
@@ -63,7 +63,7 @@ public:
 	void DoTimerProcessing();
 	bool IsStarted();
 	bool Stop();
-	bool Start(int delay);
+	bool Start(); //int delay);
 	void SetBackgroundColor(wxColour colorBgnd);
 	void SetBandsColor(wxColour colorNormal, 
 			wxColour colorMedium, 
@@ -106,6 +106,8 @@ protected:
 	wxMenu *m_menu;
 	wxTimer *m_timer;
 
+	bool	m_resized;
+
 private:
 	void OnRepeat(wxCommandEvent& WXUNUSED(event));
 	void OnRepeatNo(wxCommandEvent& WXUNUSED(event));
@@ -114,6 +116,8 @@ private:
 	void OnPaint(wxPaintEvent &WXUNUSED(event));
 	void OnSize(wxSizeEvent& event);
 	void OnTimer(wxTimerEvent &event);
+
+	void OnSized( wxPaintDC& dc );
 	
 	DECLARE_EVENT_TABLE();
 };

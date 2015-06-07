@@ -159,7 +159,7 @@ void ButtonPanel::OnOpenFiles(wxCommandEvent& WXUNUSED(event))
 		wxT("Open File(s)"), wxEmptyString,
 		wxEmptyString,
 		wxT("IMS Files (*.ims)|*.ims|All Files (*)|*"),
-		wxMULTIPLE|wxOPEN
+		wxFD_MULTIPLE|wxFD_OPEN
 	);
     dlg.CentreOnParent();
 
@@ -183,8 +183,10 @@ void ButtonPanel::OnPrev(wxCommandEvent& WXUNUSED(event))
 
 void ButtonPanel::OnSize(wxSizeEvent& event)
 {
-	wxPaintDC dc(this);
-	DrawButton(dc);
+//	wxPaintDC dc(this);
+//	DrawButton(dc);
+	Refresh();
+	event.Skip();
 }
 
 void ButtonPanel::OnMotion(wxMouseEvent& e)

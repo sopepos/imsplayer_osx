@@ -33,14 +33,19 @@
 */
 
 
-#include <Main.h>
+//#include <Main.h>
+#include "outchip.h"
+#include "opl.h"
 
-void *ym3812p;		// FMOPL 모듈 사용을 위해 새로 정의함
+//void *ym3812p;		// FMOPL 모듈 사용을 위해 새로 정의함
+Copl* ym3812p;
 
 // Set the register at address 'addr' to the value 'data'.
 // Take care of data register to data register write delay.
 void SndOutput(int addr, int dataVal)
 {
-	YM3812Write(ym3812p, 0, addr);
-	YM3812Write(ym3812p, 1, dataVal);
+//	YM3812Write(ym3812p, 0, addr);
+//	YM3812Write(ym3812p, 1, dataVal);
+
+	ym3812p->write(addr, dataVal);
 }

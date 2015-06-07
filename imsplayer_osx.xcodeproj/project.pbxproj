@@ -1,0 +1,555 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8579460F1B23A5BD0051E244 /* debuglog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8579460E1B23A5BD0051E244 /* debuglog.cpp */; };
+		857946111B23D79F0051E244 /* STANDARD.BNK in Resources */ = {isa = PBXBuildFile; fileRef = 857946101B23D79F0051E244 /* STANDARD.BNK */; };
+		85A82DF61B2346460009BB19 /* wxcocoa.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 85A82DF11B2346460009BB19 /* wxcocoa.xcconfig */; };
+		85A82DF71B2346460009BB19 /* wxdebug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 85A82DF21B2346460009BB19 /* wxdebug.xcconfig */; };
+		85A82DF81B2346460009BB19 /* wxrelease.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 85A82DF31B2346460009BB19 /* wxrelease.xcconfig */; };
+		85A82DF91B2346460009BB19 /* Info_cocoa.plist in Resources */ = {isa = PBXBuildFile; fileRef = 85A82DF41B2346460009BB19 /* Info_cocoa.plist */; };
+		85A82DFA1B2346460009BB19 /* minimal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85A82DF51B2346460009BB19 /* minimal.cpp */; };
+		85A82E291B2347DC0009BB19 /* ActionPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85A82E161B2347DC0009BB19 /* ActionPanel.cpp */; };
+		85A82E2A1B2347DC0009BB19 /* adlib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85A82E171B2347DC0009BB19 /* adlib.cpp */; };
+		85A82E2B1B2347DC0009BB19 /* Bnk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85A82E181B2347DC0009BB19 /* Bnk.cpp */; };
+		85A82E2C1B2347DC0009BB19 /* convert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85A82E191B2347DC0009BB19 /* convert.cpp */; };
+		85A82E2D1B2347DC0009BB19 /* fmopl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85A82E1A1B2347DC0009BB19 /* fmopl.cpp */; };
+		85A82E2E1B2347DC0009BB19 /* GButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85A82E1B1B2347DC0009BB19 /* GButton.cpp */; };
+		85A82E2F1B2347DC0009BB19 /* GHanLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85A82E1C1B2347DC0009BB19 /* GHanLabel.cpp */; };
+		85A82E301B2347DC0009BB19 /* GSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85A82E1D1B2347DC0009BB19 /* GSlider.cpp */; };
+		85A82E311B2347DC0009BB19 /* Hangul.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85A82E1E1B2347DC0009BB19 /* Hangul.cpp */; };
+		85A82E321B2347DC0009BB19 /* Ims.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85A82E1F1B2347DC0009BB19 /* Ims.cpp */; };
+		85A82E331B2347DC0009BB19 /* Iss.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85A82E201B2347DC0009BB19 /* Iss.cpp */; };
+		85A82E341B2347DC0009BB19 /* IssViewer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85A82E211B2347DC0009BB19 /* IssViewer.cpp */; };
+		85A82E351B2347DC0009BB19 /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85A82E221B2347DC0009BB19 /* Main.cpp */; };
+		85A82E371B2347DC0009BB19 /* outchip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85A82E241B2347DC0009BB19 /* outchip.cpp */; };
+		85A82E381B2347DC0009BB19 /* PeakMeter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85A82E251B2347DC0009BB19 /* PeakMeter.cpp */; };
+		85A82E391B2347DC0009BB19 /* setfreq.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85A82E261B2347DC0009BB19 /* setfreq.cpp */; };
+		85A82E3A1B2347DC0009BB19 /* SliderPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85A82E271B2347DC0009BB19 /* SliderPanel.cpp */; };
+		85A82E3B1B2347DC0009BB19 /* Sound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85A82E281B2347DC0009BB19 /* Sound.cpp */; };
+		85A82E3E1B234D130009BB19 /* libwx_gtk3u_stc-3.0.0.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 85A82E3D1B234D130009BB19 /* libwx_gtk3u_stc-3.0.0.2.0.dylib */; };
+		85A82E421B2352400009BB19 /* libwx_osx_cocoa_static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85A82E411B2352400009BB19 /* libwx_osx_cocoa_static.a */; };
+		85A82E441B23533F0009BB19 /* libSDL2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85A82E431B23533F0009BB19 /* libSDL2.a */; };
+		85A82E491B2396EF0009BB19 /* fdbopl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85A82E471B2396EF0009BB19 /* fdbopl.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		8579460E1B23A5BD0051E244 /* debuglog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = debuglog.cpp; sourceTree = "<group>"; };
+		857946101B23D79F0051E244 /* STANDARD.BNK */ = {isa = PBXFileReference; lastKnownFileType = file; path = STANDARD.BNK; sourceTree = "<group>"; };
+		85A82DEF1B23461D0009BB19 /* imsplayer_osx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = imsplayer_osx.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		85A82DF11B2346460009BB19 /* wxcocoa.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = wxcocoa.xcconfig; sourceTree = "<group>"; };
+		85A82DF21B2346460009BB19 /* wxdebug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = wxdebug.xcconfig; sourceTree = "<group>"; };
+		85A82DF31B2346460009BB19 /* wxrelease.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = wxrelease.xcconfig; sourceTree = "<group>"; };
+		85A82DF41B2346460009BB19 /* Info_cocoa.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info_cocoa.plist; sourceTree = "<group>"; };
+		85A82DF51B2346460009BB19 /* minimal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = minimal.cpp; sourceTree = "<group>"; };
+		85A82E021B2347CA0009BB19 /* ActionPanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActionPanel.h; sourceTree = "<group>"; };
+		85A82E031B2347CA0009BB19 /* adlib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = adlib.h; sourceTree = "<group>"; };
+		85A82E041B2347CA0009BB19 /* Base.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Base.h; sourceTree = "<group>"; };
+		85A82E051B2347CA0009BB19 /* Bnk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bnk.h; sourceTree = "<group>"; };
+		85A82E061B2347CA0009BB19 /* convert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = convert.h; sourceTree = "<group>"; };
+		85A82E071B2347CA0009BB19 /* fmopl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fmopl.h; sourceTree = "<group>"; };
+		85A82E081B2347CA0009BB19 /* GButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GButton.h; sourceTree = "<group>"; };
+		85A82E091B2347CA0009BB19 /* GHanLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GHanLabel.h; sourceTree = "<group>"; };
+		85A82E0A1B2347CA0009BB19 /* GSlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GSlider.h; sourceTree = "<group>"; };
+		85A82E0B1B2347CA0009BB19 /* Hangul.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Hangul.h; sourceTree = "<group>"; };
+		85A82E0C1B2347CA0009BB19 /* Ims.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ims.h; sourceTree = "<group>"; };
+		85A82E0D1B2347CA0009BB19 /* Iss.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Iss.h; sourceTree = "<group>"; };
+		85A82E0E1B2347CA0009BB19 /* IssViewer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IssViewer.h; sourceTree = "<group>"; };
+		85A82E0F1B2347CA0009BB19 /* Main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Main.h; sourceTree = "<group>"; };
+		85A82E101B2347CA0009BB19 /* outchip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = outchip.h; sourceTree = "<group>"; };
+		85A82E111B2347CA0009BB19 /* PeakMeter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeakMeter.h; sourceTree = "<group>"; };
+		85A82E121B2347CA0009BB19 /* setfreq.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = setfreq.h; sourceTree = "<group>"; };
+		85A82E131B2347CA0009BB19 /* SliderPanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SliderPanel.h; sourceTree = "<group>"; };
+		85A82E141B2347CA0009BB19 /* Sound.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sound.h; sourceTree = "<group>"; };
+		85A82E151B2347D40009BB19 /* FFT.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FFT.hpp; sourceTree = "<group>"; };
+		85A82E161B2347DC0009BB19 /* ActionPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ActionPanel.cpp; sourceTree = "<group>"; };
+		85A82E171B2347DC0009BB19 /* adlib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = adlib.cpp; sourceTree = "<group>"; };
+		85A82E181B2347DC0009BB19 /* Bnk.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bnk.cpp; sourceTree = "<group>"; };
+		85A82E191B2347DC0009BB19 /* convert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = convert.cpp; sourceTree = "<group>"; };
+		85A82E1A1B2347DC0009BB19 /* fmopl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fmopl.cpp; sourceTree = "<group>"; };
+		85A82E1B1B2347DC0009BB19 /* GButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GButton.cpp; sourceTree = "<group>"; };
+		85A82E1C1B2347DC0009BB19 /* GHanLabel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GHanLabel.cpp; sourceTree = "<group>"; };
+		85A82E1D1B2347DC0009BB19 /* GSlider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GSlider.cpp; sourceTree = "<group>"; };
+		85A82E1E1B2347DC0009BB19 /* Hangul.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Hangul.cpp; sourceTree = "<group>"; };
+		85A82E1F1B2347DC0009BB19 /* Ims.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ims.cpp; sourceTree = "<group>"; };
+		85A82E201B2347DC0009BB19 /* Iss.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Iss.cpp; sourceTree = "<group>"; };
+		85A82E211B2347DC0009BB19 /* IssViewer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IssViewer.cpp; sourceTree = "<group>"; };
+		85A82E221B2347DC0009BB19 /* Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Main.cpp; sourceTree = "<group>"; };
+		85A82E241B2347DC0009BB19 /* outchip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = outchip.cpp; sourceTree = "<group>"; };
+		85A82E251B2347DC0009BB19 /* PeakMeter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PeakMeter.cpp; sourceTree = "<group>"; };
+		85A82E261B2347DC0009BB19 /* setfreq.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = setfreq.cpp; sourceTree = "<group>"; };
+		85A82E271B2347DC0009BB19 /* SliderPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SliderPanel.cpp; sourceTree = "<group>"; };
+		85A82E281B2347DC0009BB19 /* Sound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sound.cpp; sourceTree = "<group>"; };
+		85A82E3D1B234D130009BB19 /* libwx_gtk3u_stc-3.0.0.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libwx_gtk3u_stc-3.0.0.2.0.dylib"; path = "/opt/local/Library/Frameworks/wxWidgets.framework/Versions/wxGTK/3.0/lib/libwx_gtk3u_stc-3.0.0.2.0.dylib"; sourceTree = "<absolute>"; };
+		85A82E411B2352400009BB19 /* libwx_osx_cocoa_static.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwx_osx_cocoa_static.a; path = /usr/local/lib/libwx_osx_cocoa_static.a; sourceTree = "<absolute>"; };
+		85A82E431B23533F0009BB19 /* libSDL2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2.a; path = /opt/local/lib/libSDL2.a; sourceTree = "<absolute>"; };
+		85A82E461B2396EF0009BB19 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		85A82E471B2396EF0009BB19 /* fdbopl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fdbopl.cpp; sourceTree = "<group>"; };
+		85A82E481B2396EF0009BB19 /* fdbopl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fdbopl.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		85099B8F1B23441D0083EA93 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85A82E3E1B234D130009BB19 /* libwx_gtk3u_stc-3.0.0.2.0.dylib in Frameworks */,
+				85A82E421B2352400009BB19 /* libwx_osx_cocoa_static.a in Frameworks */,
+				85A82E441B23533F0009BB19 /* libSDL2.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		85099B891B23441D0083EA93 = {
+			isa = PBXGroup;
+			children = (
+				85A82E4A1B239BCB0009BB19 /* fmopl */,
+				85A82E451B2396EF0009BB19 /* fdbopl */,
+				85A82E011B2347AF0009BB19 /* include */,
+				85A82E001B2347A10009BB19 /* src */,
+				85A82E4B1B239BF50009BB19 /* ims */,
+				85A82DFF1B2347520009BB19 /* Supporting files */,
+				85A82DFE1B2347440009BB19 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		85A82DFE1B2347440009BB19 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				85A82DEF1B23461D0009BB19 /* imsplayer_osx.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		85A82DFF1B2347520009BB19 /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				857946101B23D79F0051E244 /* STANDARD.BNK */,
+				8579460E1B23A5BD0051E244 /* debuglog.cpp */,
+				85A82DF51B2346460009BB19 /* minimal.cpp */,
+				85A82E431B23533F0009BB19 /* libSDL2.a */,
+				85A82E411B2352400009BB19 /* libwx_osx_cocoa_static.a */,
+				85A82E3D1B234D130009BB19 /* libwx_gtk3u_stc-3.0.0.2.0.dylib */,
+				85A82DF11B2346460009BB19 /* wxcocoa.xcconfig */,
+				85A82DF21B2346460009BB19 /* wxdebug.xcconfig */,
+				85A82DF31B2346460009BB19 /* wxrelease.xcconfig */,
+				85A82DF41B2346460009BB19 /* Info_cocoa.plist */,
+			);
+			name = "Supporting files";
+			sourceTree = "<group>";
+		};
+		85A82E001B2347A10009BB19 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				85A82E161B2347DC0009BB19 /* ActionPanel.cpp */,
+				85A82E191B2347DC0009BB19 /* convert.cpp */,
+				85A82E1B1B2347DC0009BB19 /* GButton.cpp */,
+				85A82E1C1B2347DC0009BB19 /* GHanLabel.cpp */,
+				85A82E1D1B2347DC0009BB19 /* GSlider.cpp */,
+				85A82E1E1B2347DC0009BB19 /* Hangul.cpp */,
+				85A82E211B2347DC0009BB19 /* IssViewer.cpp */,
+				85A82E251B2347DC0009BB19 /* PeakMeter.cpp */,
+				85A82E271B2347DC0009BB19 /* SliderPanel.cpp */,
+				85A82E281B2347DC0009BB19 /* Sound.cpp */,
+				85A82E221B2347DC0009BB19 /* Main.cpp */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		85A82E011B2347AF0009BB19 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				85A82E151B2347D40009BB19 /* FFT.hpp */,
+				85A82E021B2347CA0009BB19 /* ActionPanel.h */,
+				85A82E041B2347CA0009BB19 /* Base.h */,
+				85A82E061B2347CA0009BB19 /* convert.h */,
+				85A82E081B2347CA0009BB19 /* GButton.h */,
+				85A82E091B2347CA0009BB19 /* GHanLabel.h */,
+				85A82E0A1B2347CA0009BB19 /* GSlider.h */,
+				85A82E0B1B2347CA0009BB19 /* Hangul.h */,
+				85A82E0E1B2347CA0009BB19 /* IssViewer.h */,
+				85A82E111B2347CA0009BB19 /* PeakMeter.h */,
+				85A82E131B2347CA0009BB19 /* SliderPanel.h */,
+				85A82E141B2347CA0009BB19 /* Sound.h */,
+				85A82E0F1B2347CA0009BB19 /* Main.h */,
+			);
+			name = include;
+			sourceTree = "<group>";
+		};
+		85A82E451B2396EF0009BB19 /* fdbopl */ = {
+			isa = PBXGroup;
+			children = (
+				85A82E461B2396EF0009BB19 /* config.h */,
+				85A82E471B2396EF0009BB19 /* fdbopl.cpp */,
+				85A82E481B2396EF0009BB19 /* fdbopl.h */,
+			);
+			path = fdbopl;
+			sourceTree = "<group>";
+		};
+		85A82E4A1B239BCB0009BB19 /* fmopl */ = {
+			isa = PBXGroup;
+			children = (
+				85A82E031B2347CA0009BB19 /* adlib.h */,
+				85A82E171B2347DC0009BB19 /* adlib.cpp */,
+				85A82E071B2347CA0009BB19 /* fmopl.h */,
+				85A82E101B2347CA0009BB19 /* outchip.h */,
+				85A82E121B2347CA0009BB19 /* setfreq.h */,
+				85A82E1A1B2347DC0009BB19 /* fmopl.cpp */,
+				85A82E241B2347DC0009BB19 /* outchip.cpp */,
+				85A82E261B2347DC0009BB19 /* setfreq.cpp */,
+			);
+			name = fmopl;
+			sourceTree = "<group>";
+		};
+		85A82E4B1B239BF50009BB19 /* ims */ = {
+			isa = PBXGroup;
+			children = (
+				85A82E051B2347CA0009BB19 /* Bnk.h */,
+				85A82E181B2347DC0009BB19 /* Bnk.cpp */,
+				85A82E0C1B2347CA0009BB19 /* Ims.h */,
+				85A82E1F1B2347DC0009BB19 /* Ims.cpp */,
+				85A82E0D1B2347CA0009BB19 /* Iss.h */,
+				85A82E201B2347DC0009BB19 /* Iss.cpp */,
+			);
+			name = ims;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		85099B911B23441D0083EA93 /* imsplayer_osx */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 85099BAF1B23441D0083EA93 /* Build configuration list for PBXNativeTarget "imsplayer_osx" */;
+			buildPhases = (
+				85099B8E1B23441D0083EA93 /* Sources */,
+				85099B8F1B23441D0083EA93 /* Frameworks */,
+				85099B901B23441D0083EA93 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = imsplayer_osx;
+			productName = imsplayer_osx;
+			productReference = 85A82DEF1B23461D0009BB19 /* imsplayer_osx.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		85099B8A1B23441D0083EA93 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = PepSoft;
+				TargetAttributes = {
+					85099B911B23441D0083EA93 = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+				};
+			};
+			buildConfigurationList = 85099B8D1B23441D0083EA93 /* Build configuration list for PBXProject "imsplayer_osx" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 85099B891B23441D0083EA93;
+			productRefGroup = 85099B891B23441D0083EA93;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				85099B911B23441D0083EA93 /* imsplayer_osx */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		85099B901B23441D0083EA93 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85A82DF61B2346460009BB19 /* wxcocoa.xcconfig in Resources */,
+				85A82DF71B2346460009BB19 /* wxdebug.xcconfig in Resources */,
+				857946111B23D79F0051E244 /* STANDARD.BNK in Resources */,
+				85A82DF91B2346460009BB19 /* Info_cocoa.plist in Resources */,
+				85A82DF81B2346460009BB19 /* wxrelease.xcconfig in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		85099B8E1B23441D0083EA93 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85A82E391B2347DC0009BB19 /* setfreq.cpp in Sources */,
+				85A82E2D1B2347DC0009BB19 /* fmopl.cpp in Sources */,
+				85A82E321B2347DC0009BB19 /* Ims.cpp in Sources */,
+				85A82E291B2347DC0009BB19 /* ActionPanel.cpp in Sources */,
+				85A82E381B2347DC0009BB19 /* PeakMeter.cpp in Sources */,
+				85A82E331B2347DC0009BB19 /* Iss.cpp in Sources */,
+				85A82E2E1B2347DC0009BB19 /* GButton.cpp in Sources */,
+				85A82DFA1B2346460009BB19 /* minimal.cpp in Sources */,
+				85A82E2F1B2347DC0009BB19 /* GHanLabel.cpp in Sources */,
+				85A82E341B2347DC0009BB19 /* IssViewer.cpp in Sources */,
+				8579460F1B23A5BD0051E244 /* debuglog.cpp in Sources */,
+				85A82E371B2347DC0009BB19 /* outchip.cpp in Sources */,
+				85A82E351B2347DC0009BB19 /* Main.cpp in Sources */,
+				85A82E3A1B2347DC0009BB19 /* SliderPanel.cpp in Sources */,
+				85A82E2A1B2347DC0009BB19 /* adlib.cpp in Sources */,
+				85A82E491B2396EF0009BB19 /* fdbopl.cpp in Sources */,
+				85A82E311B2347DC0009BB19 /* Hangul.cpp in Sources */,
+				85A82E301B2347DC0009BB19 /* GSlider.cpp in Sources */,
+				85A82E2B1B2347DC0009BB19 /* Bnk.cpp in Sources */,
+				85A82E2C1B2347DC0009BB19 /* convert.cpp in Sources */,
+				85A82E3B1B2347DC0009BB19 /* Sound.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		85099BAD1B23441D0083EA93 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 85A82DF21B2346460009BB19 /* wxdebug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		85099BAE1B23441D0083EA93 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 85A82DF31B2346460009BB19 /* wxrelease.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		85099BB01B23441D0083EA93 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 85A82DF11B2346460009BB19 /* wxcocoa.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LIBRARY = "libstdc++";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PREFIX_HEADER = "$(WXROOT)/include/wx/wxprec.h";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(WX_PREPROCESSOR_DEFINITIONS)",
+					WXBUILDING,
+					"$(WXPLATFORM)",
+					__WX__,
+					"wxUSE_BASE=1",
+					"_FILE_OFFSET_BITS=64",
+					_LARGE_FILES,
+					MACOS_CLASSIC,
+					"__WXMAC_XCODE__=1",
+					SCI_LEXER,
+					"WX_PRECOMP=1",
+					"wxUSE_UNICODE_UTF8=0",
+					"wxUSE_UNICODE_WCHAR=1",
+					__WXOSX_COCOA__,
+					"DEBUG=$(XCODE_DEBUG_CONFIGURATION)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(WXROOT)/build/osx/setup/cocoa/include",
+					"$(WXROOT)/include",
+					/opt/local/include,
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Info_cocoa.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/local/Library/Frameworks/wxWidgets.framework/Versions/wxGTK/3.0/lib,
+					/usr/local/lib,
+					/opt/local/lib,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				OTHER_LDFLAGS = (
+					"-framework",
+					WebKit,
+					"-framework",
+					IOKit,
+					"-framework",
+					Carbon,
+					"-framework",
+					Cocoa,
+					"-framework",
+					AudioToolbox,
+					"-framework",
+					OpenGL,
+					"-framework",
+					QTKit,
+					"-lz",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WXROOT = "/Users/sopepos/Projects/wxWidgets-3.0.2";
+			};
+			name = Debug;
+		};
+		85099BB11B23441D0083EA93 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 85A82DF11B2346460009BB19 /* wxcocoa.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LIBRARY = "libstdc++";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PREFIX_HEADER = "$(WXROOT)/include/wx/wxprec.h";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(WX_PREPROCESSOR_DEFINITIONS)",
+					WXBUILDING,
+					"$(WXPLATFORM)",
+					__WX__,
+					"wxUSE_BASE=1",
+					"_FILE_OFFSET_BITS=64",
+					_LARGE_FILES,
+					MACOS_CLASSIC,
+					"__WXMAC_XCODE__=1",
+					SCI_LEXER,
+					"WX_PRECOMP=1",
+					"wxUSE_UNICODE_UTF8=0",
+					"wxUSE_UNICODE_WCHAR=1",
+					__WXOSX_COCOA__,
+					"DEBUG=$(XCODE_DEBUG_CONFIGURATION)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(WXROOT)/build/osx/setup/cocoa/include",
+					"$(WXROOT)/include",
+					/opt/local/include,
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Info_cocoa.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/local/Library/Frameworks/wxWidgets.framework/Versions/wxGTK/3.0/lib,
+					/usr/local/lib,
+					/opt/local/lib,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				OTHER_LDFLAGS = (
+					"-framework",
+					WebKit,
+					"-framework",
+					IOKit,
+					"-framework",
+					Carbon,
+					"-framework",
+					Cocoa,
+					"-framework",
+					AudioToolbox,
+					"-framework",
+					OpenGL,
+					"-framework",
+					QTKit,
+					"-lz",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WXROOT = "/Users/sopepos/Projects/wxWidgets-3.0.2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		85099B8D1B23441D0083EA93 /* Build configuration list for PBXProject "imsplayer_osx" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85099BAD1B23441D0083EA93 /* Debug */,
+				85099BAE1B23441D0083EA93 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		85099BAF1B23441D0083EA93 /* Build configuration list for PBXNativeTarget "imsplayer_osx" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85099BB01B23441D0083EA93 /* Debug */,
+				85099BB11B23441D0083EA93 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 85099B8A1B23441D0083EA93 /* Project object */;
+}

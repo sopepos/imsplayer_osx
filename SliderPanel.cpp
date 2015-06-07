@@ -58,8 +58,10 @@ float SliderPanel::GetValue()
 
 void SliderPanel::OnSize(wxSizeEvent& event)
 {
-	wxPaintDC dc(this);
-	DrawSlider(dc);
+//	wxPaintDC dc(this);
+//	DrawSlider(dc);
+	Refresh();
+	event.Skip();
 }
 
 void SliderPanel::OnMotion(wxMouseEvent& e)

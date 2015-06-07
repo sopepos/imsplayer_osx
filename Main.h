@@ -45,7 +45,7 @@ private:
 };
 
 //
-// MyTcl ∏ﬁ¿Œ «¡∑π¿”
+// MyTcl Î©îÏù∏ ÌîÑÎ†àÏûÑ
 //
 class MainFrame : public wxFrame
 {
@@ -101,7 +101,10 @@ public:
 	void Next();
 	void Prev();
 
-    
+	// event handlers (these functions should _not_ be virtual)
+	void OnQuit(wxCommandEvent& event);
+	void OnAbout(wxCommandEvent& event);
+
 private:
 	void OnCloseApp(wxCloseEvent& WXUNUSED(event));
 	void OnTimer(wxTimerEvent &event);
@@ -110,7 +113,7 @@ private:
     wxMenu* m_perspectives_menu;
     long m_notebook_style;
 
-    DECLARE_EVENT_TABLE()
+	wxDECLARE_EVENT_TABLE();
 };
 
 #endif

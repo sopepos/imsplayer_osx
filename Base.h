@@ -10,6 +10,10 @@
     #pragma hdrstop
 #endif
 
+#ifndef WX_PRECOMP
+#include "wx/wx.h"
+#endif
+
 #include <wx/generic/aboutdlgg.h>
 #include <wx/aboutdlg.h>
 #include <wx/url.h>         //for wxURL/wxURI
@@ -69,6 +73,7 @@
 #include <wx/colordlg.h>
 #include <wx/popupwin.h>
 #include <wx/strconv.h>
+#include <wx/filedlg.h>
 
 // boost
 #include <boost/shared_ptr.hpp>
@@ -85,8 +90,9 @@
 #include <ctype.h>
 #include <signal.h>
 
-#include <SDL/SDL.h>
-#include <SDL/SDL_mixer.h>
+//#include <SDL/SDL.h>
+//#include <SDL/SDL_mixer.h>
+#include <SDL/SDL_audio.h>
 
 wxBitmap wxGetBitmapFromMemory(const void * data, size_t length);
 
@@ -119,11 +125,11 @@ using namespace std;
 #define STOPPED		2
 #define SONG_END	3
 
-#define REPEAT_NO		0	// Áö±İ °î ¿¬ÁÖÇÏ°í ÁßÁö
-#define REPEAT_ALL		1	// Áö±İ °î ¿¬ÁÖ ³¡³ª¸é ´ÙÀ½°îÀ¸·Î..
-#define REPEAT_THIS		2	// Áö±İ °î ¹İº¹ ¿¬ÁÖ
+#define REPEAT_NO		0	// ì§€ê¸ˆ ê³¡ ì—°ì£¼í•˜ê³  ì¤‘ì§€
+#define REPEAT_ALL		1	// ì§€ê¸ˆ ê³¡ ì—°ì£¼ ëë‚˜ë©´ ë‹¤ìŒê³¡ìœ¼ë¡œ..
+#define REPEAT_THIS		2	// ì§€ê¸ˆ ê³¡ ë°˜ë³µ ì—°ì£¼
 
-#define PREPARE_BUFFER_COUNT	20
+#define PREPARE_BUFFER_COUNT	2 // 20
 #define PREPARE_BUFFER_SIZE		512*2
 
 // --------------------------------------------

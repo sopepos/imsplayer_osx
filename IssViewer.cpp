@@ -99,8 +99,9 @@ void IssViewer::Draw(wxPaintDC &dc)
 
 void IssViewer::OnSize(wxSizeEvent& event)
 {
-	wxPaintDC dc(this);
+//	wxPaintDC dc(this);
 	Refresh();
+	event.Skip();	
 }
 
 void IssViewer::OnPaint(wxPaintEvent &WXUNUSED(event)) 

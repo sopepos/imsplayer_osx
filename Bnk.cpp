@@ -4,11 +4,14 @@ Bnk::Bnk () {}
 
 Bnk::~Bnk ()
 {
-	free(m_bnk->nameRecord);
-	free(m_bnk->instRecord);
-	free(m_bnk->instRecord32);
-	free(m_bnk->raw);
-	free(m_bnk);
+	if( m_bnk )
+	{
+		free(m_bnk->nameRecord);
+		free(m_bnk->instRecord);
+		free(m_bnk->instRecord32);
+		free(m_bnk->raw);
+		free(m_bnk);
+	}
 }
 
 MYADLIB_BNK *Bnk::GetBnk()
@@ -30,6 +33,8 @@ bool Bnk::Open(wxString file)
 	m_bnk = (MYADLIB_BNK *)malloc(sizeof(MYADLIB_BNK));
 	if (m_bnk == NULL) 
 		return false;
+
+	m_bnk->Init();
 
 	m_fileName = file;
 

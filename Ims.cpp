@@ -1,4 +1,5 @@
 #include "Main.h"
+#include <string>
 
 Ims::Ims () 
 {
@@ -31,13 +32,20 @@ wxString Ims::GetTitle()
 	char title[30];
 	han_conv(0, m_ims->header.szTuneName, title);
 
-	wchar_t wszBuffer[30];
+// 	wchar_t wszBuffer[30];
 	// cp949 -> unicode
-	MultiByteToWideChar(CP_ACP, 0, title, -1, wszBuffer, 30);
+//	MultiByteToWideChar(CP_ACP, 0, title, -1, wszBuffer, 30);
 	// unicode -> utf-8
-	WideCharToMultiByte(CP_UTF8, 0, wszBuffer, -1, title, 30, NULL, NULL);
+// 	WideCharToMultiByte(CP_UTF8, 0, wszBuffer, -1, title, 30, NULL, NULL);
 
-	return wxString(wszBuffer, wxConvUTF8);
+// 	return wxString(wszBuffer, wxConvUTF8);
+
+//	std::string str( title );
+//	std::wstring wsz = L"";
+//	wsz.assign( str.begin(), str.end() );
+
+// 	return wxString(wsz.c_str(), wxConvUTF8);
+	return wxString(title, wxConvUTF8);
 }
 
 char *Ims::GetTitleJohab()
@@ -285,7 +293,8 @@ again:
 
 bool Ims::MatchBnk(MYADLIB_BNK *bnk)
 {
-    if (m_ims == NULL) return false;
+    if (m_ims == NULL || bnk == NULL)
+		return false;
 
 	wxString notFoundInstList = wxEmptyString;
 
@@ -326,11 +335,24 @@ bool Ims::MatchBnk(MYADLIB_BNK *bnk)
     return true;
 }
 
+static void ResetChip()
+{
+	int i;
+
+	for(i=1; i<=0xF5; i++){
+		if(i>=0x40 && i<=0x55) SndOutput(i,0x3f);  // Total Level
+		else SndOutput(i, 0);
+	}
+	SndOutput(0x01,0x20);
+	SndOutput(0x04,0x60);
+}
+
 bool Ims::Reset(void)
 {
     if (m_ims == NULL) return false;
 
-	YM3812ResetChip(ym3812p);
+//	YM3812ResetChip(ym3812p);
+	ResetChip();
 
 	SndOutput(1, 0x20);	// Enable waveform select (bit 5)
 	SetMode(m_ims->header.nSoundMode);

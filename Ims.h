@@ -14,18 +14,18 @@ extern "C" {
 typedef struct {
 	unsigned char nVerMajor;		// 1 byte
 	unsigned char nVerMinor;		// 1 byte
-	long int nTuneID;				// 4 byte
+	int nTuneID;				// 4 byte
 	char szTuneName[30];			// 30 byte
 	unsigned char nTickBeat;		// 1 byte
 	unsigned char nBeatMeasure;		// 1 byte
-	long int nTotalTick;			// 4 byte
-	long int cbDataSize;			// 4 byte
-	long int nrCommand;				// 4 byte
+	int nTotalTick;			// 4 byte
+	int cbDataSize;			// 4 byte
+	int nrCommand;				// 4 byte
 	unsigned char nSrcTickBeat;		// 1 byte
 	char filler[7];					// 7 byte
 	unsigned char nSoundMode;		// 1 byte
 	unsigned char nPitchBRange;		// 1 byte
-	unsigned short int nBasicTempo;	// 2 byte
+	unsigned short nBasicTempo;	// 2 byte
 	char filler2[8];				// 8 byte
 } IMS_HEADER;						// 70 byte
 #pragma pack(pop)

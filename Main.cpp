@@ -4,26 +4,32 @@
 #include "bmp/empty.h"
 #include "bmp/playing.h"
 
+#define _SDL_main_h // should not include SDL_main.h, so pre-declare _SDL_main_h
+#include <SDL/SDL.h>
+
+#include "opl.h"
+#include "debuglog.h"
+
 Uint8 *pcm_buffer[2][PREPARE_BUFFER_COUNT];
 unsigned int song_tick[2][PREPARE_BUFFER_COUNT];
 ISS_RECORD *lyrics_buffer[2][PREPARE_BUFFER_COUNT];
 void callback(void *userdata, Uint8 *pcm_buffer, int len);
 
-// ÇöÀç ¿¬ÁÖÁßÀÎ ¹öÆÛ
+// í˜„ì¬ ì—°ì£¼ì¤‘ì¸ ë²„í¼
 int m_playingBuffer=0;
-// ÇöÀç ¿¬ÁÖÁßÀÎ ¹öÆÛÀÇ ÀÎµ¦½º
+// í˜„ì¬ ì—°ì£¼ì¤‘ì¸ ë²„í¼ì˜ ì¸ë±ìŠ¤
 int m_playingBufferIndex=0;
-// ¸¶Áö¸· º¸¿©ÁØ °¡»ç ¶óÀÎ
+// ë§ˆì§€ë§‰ ë³´ì—¬ì¤€ ê°€ì‚¬ ë¼ì¸
 int m_lastLyricsLine= -1;
-// ¸¶Áö¸· º¸¿©ÁØ °¡»ç ·¹ÄÚµå
+// ë§ˆì§€ë§‰ ë³´ì—¬ì¤€ ê°€ì‚¬ ë ˆì½”ë“œ
 int m_lastLyricsRecord = 0;
 
-// ¿¬ÁÖ°¡ Á¾·áµÈ ¹öÆÛ
+// ì—°ì£¼ê°€ ì¢…ë£Œëœ ë²„í¼
 int m_endBuffer;
-// ¿¬ÁÖ°¡ Á¾·áµÈ ¹öÆÛÀÇ ÀÎµ¦½º
+// ì—°ì£¼ê°€ ì¢…ë£Œëœ ë²„í¼ì˜ ì¸ë±ìŠ¤
 int m_endBufferIndex;
 
-// ¿¬ÁÖÁßÀÎ ¸®½ºÆ® ÀÎµ¦½º
+// ì—°ì£¼ì¤‘ì¸ ë¦¬ìŠ¤íŠ¸ ì¸ë±ìŠ¤
 long m_playingItem = -1;
 
 wxString exePath;
@@ -36,19 +42,23 @@ int m_repeatMode = REPEAT_ALL;
 class MainApp : public wxApp
 {
 public:
-    bool OnInit();
+    virtual bool OnInit();
 };
 
-DECLARE_APP(MainApp)
-IMPLEMENT_APP(MainApp)
+//DECLARE_APP(MainApp)
 
 bool MainApp::OnInit()
 {
-	wxFrame *mainFrame = new MainFrame(NULL,
-		 wxID_ANY, wxT("IMS Player"), 
-		 wxDefaultPosition, wxSize(620, 600));
+	// call the base class initialization method, currently it only parses a
+	// few common command-line options but it could be do more in the future
+	if ( !wxApp::OnInit() )
+		return false;
+	
+	MainFrame *mainFrame = new MainFrame(NULL, wxID_ANY, wxT("IMS Player"), wxDefaultPosition, wxSize(620, 600));
+
 	mainFrame->SetMinSize(wxSize(620,600));
     SetTopWindow(mainFrame);
+
     mainFrame->Show();
 
     return true;
@@ -61,7 +71,7 @@ bool DnD::OnDropFiles(wxCoord, wxCoord, const wxArrayString& filenames)
 	{
 		for(unsigned int i=0; i<filenames.size(); i++)
 		{
-			// ÆÄÀÏÀÌ¸é Ãß°¡
+			// íŒŒì¼ì´ë©´ ì¶”ê°€
 			wxFileName file(filenames[i]);
 			if ( file.FileExists() )
 			{
@@ -71,7 +81,7 @@ bool DnD::OnDropFiles(wxCoord, wxCoord, const wxArrayString& filenames)
 					m_frame->AddFile(filenames[i]);
 				}
 
-			// µğ·ºÅä¸®ÀÌ¸é Àç±Í°Ë»ö
+			// ë””ë ‰í† ë¦¬ì´ë©´ ì¬ê·€ê²€ìƒ‰
 			} else {
 				wxArrayString files;
 				SongSearch traverser(files);
@@ -83,7 +93,7 @@ bool DnD::OnDropFiles(wxCoord, wxCoord, const wxArrayString& filenames)
 				{
 					wxFileName file2(files[x]);
 
-					// ÆÄÀÏÀÌ¸é Ãß°¡
+					// íŒŒì¼ì´ë©´ ì¶”ê°€
 					wxString ext = file2.GetExt();
 					if ( ext.Lower() == wxT("ims") )
 					{
@@ -99,12 +109,54 @@ bool DnD::OnDropFiles(wxCoord, wxCoord, const wxArrayString& filenames)
 }
 
 // ------------------
+enum
+{
+	// menu items
+	MainApp_Quit = wxID_EXIT,
 
-BEGIN_EVENT_TABLE(MainFrame, wxFrame)
+	// it is important for the id corresponding to the "About" command to have
+	// this standard value as otherwise it won't be handled properly under Mac
+	// (where it is special and put into the "Apple" menu)
+	MainApp_About = wxID_ABOUT
+};
+
+
+wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
+	EVT_MENU(MainApp_Quit,  MainFrame::OnQuit)
+	EVT_MENU(MainApp_About, MainFrame::OnAbout)
 	EVT_SIZE(MainFrame::OnSize)
     EVT_CLOSE(MainFrame::OnCloseApp)
 	EVT_TIMER(wxID_ANY, MainFrame::OnTimer)
-END_EVENT_TABLE()
+wxEND_EVENT_TABLE()
+
+IMPLEMENT_APP(MainApp)
+
+// event handlers
+
+void MainFrame::OnQuit(wxCommandEvent& WXUNUSED(event))
+{
+	// true is to force the frame to close
+	Close(true);
+}
+
+void MainFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
+{
+	wxMessageBox(wxString::Format
+				 (
+				  "Welcome to %s!\n"
+				  "\n"
+				  "This is the imsplay\n"
+				  "running under %s.",
+				  wxVERSION_STRING,
+				  wxGetOsDescription()
+				  ),
+				 "About imsplay",
+				 wxOK | wxICON_INFORMATION,
+				 this);
+}
+
+
+/////
 
 MainFrame::MainFrame(wxWindow* parent,
 	 wxWindowID id,
@@ -115,13 +167,31 @@ MainFrame::MainFrame(wxWindow* parent,
 	: wxFrame(parent, id, title, pos, size, style)
 {
 	m_thread = NULL;
-
     m_mgr.SetManagedWindow(this);
-
 	m_meter = NULL;
-
 	wxInitAllImageHandlers();
-	
+
+	// menus
+#if wxUSE_MENUS
+	// create a menu bar
+	wxMenu *fileMenu = new wxMenu;
+
+	// the "About" item should be in the help menu
+	wxMenu *helpMenu = new wxMenu;
+	helpMenu->Append(MainApp_About, "&About\tF1", "Show about dialog");
+
+	fileMenu->Append(MainApp_Quit, "E&xit\tAlt-X", "Quit this program");
+
+	// now append the freshly created menu to the menu bar...
+	wxMenuBar *menuBar = new wxMenuBar();
+	menuBar->Append(fileMenu, "&File");
+	menuBar->Append(helpMenu, "&Help");
+
+	// ... and attach this menu bar to the frame
+	SetMenuBar(menuBar);
+#endif // wxUSE_MENUS
+
+	////
 #ifdef __MINGW32__
 	char _drv[MAX_PATH], _path[MAX_PATH];
 	char fname[MAX_PATH], ext[MAX_PATH];
@@ -164,7 +234,7 @@ MainFrame::MainFrame(wxWindow* parent,
 	m_statusBar = new wxStatusBar(this, -1);
 	m_statusBar->SetFieldsCount(3);
 	int width[3] = { 150, 150, -1 };
-	m_statusBar->SetStatusWidths(0, width);
+	m_statusBar->SetStatusWidths(3, width);
 	m_statusBar->SetStatusText(wxT("inhak.min@gmail.com"), 0);
 	
 	SetStatusBar(m_statusBar);
@@ -184,8 +254,8 @@ MainFrame::MainFrame(wxWindow* parent,
 			wxDefaultPosition, wxSize(-1,74), 
 			wxNO_BORDER);
 
-	// NUM_FREQUENCY: ºĞ¼®ÇÒ ÁÖÆÄ¼ö °¹¼ö
-	// 20: °¢ ÁÖÆÄ¼öÀÇ ³ôÀÌ
+	// NUM_FREQUENCY: ë¶„ì„í•  ì£¼íŒŒìˆ˜ ê°¯ìˆ˜
+	// 20: ê° ì£¼íŒŒìˆ˜ì˜ ë†’ì´
     m_meter->SetMeterBands(NUM_FREQUENCY, 20);
 	
 	sizer->Add(m_meter, 0, wxEXPAND|wxTOP, 3);
@@ -272,11 +342,11 @@ MainFrame::MainFrame(wxWindow* parent,
 		return;
 	}
 
-	m_spec.freq = 22050;	// 1ÃÊ´ç 22050°³ »ùÇÃ (º¸Åë °ÔÀÓ¿¡¼­ ¸¹ÀÌ »ç¿ë)
+	m_spec.freq = 44100;	// 1ì´ˆë‹¹ 22050ê°œ ìƒ˜í”Œ (ë³´í†µ ê²Œì„ì—ì„œ ë§ì´ ì‚¬ìš©)
 	m_spec.format = AUDIO_S16SYS; 	// 16bit
 	m_spec.channels = 1;	// mono
 	m_spec.samples = 512;	// buffer
-	// len 4096ÀÌ ³Ñ¾î°£´Ù.
+	// len 4096ì´ ë„˜ì–´ê°„ë‹¤.
 	// len = samples * channels * format (16bit <-- 2byte)
 	m_spec.callback = callback;		
 	m_spec.userdata = this;
@@ -350,7 +420,14 @@ void free_prepare_pcm_buffer (int bufferIndex)
 	}
 }
 
-// ´ÙÀ½ 10°³ÀÇ pcm µ¥ÀÌÅ¸¸¦ ÁØºñÇÑ´Ù.
+inline int mul_div(int number, int numerator, int denominator) {
+    long long ret = number;
+    ret *= numerator;
+    ret /= denominator;
+    return (int) ret;
+}
+
+// ë‹¤ìŒ 10ê°œì˜ pcm ë°ì´íƒ€ë¥¼ ì¤€ë¹„í•œë‹¤.
 void prepare_next (void *userdata, int len, int bufferIndex)
 {
 	if ( m_playMode == STOP || m_playMode == STOPPED ||
@@ -371,17 +448,17 @@ void prepare_next (void *userdata, int len, int bufferIndex)
 
 		to_write_len = len / self->GetBytePerSampleSize();
 		
-		// Æ½À» ÀúÀåÇÑ´Ù.
+		// í‹±ì„ ì €ì¥í•œë‹¤.
 		int tick = m_ims->GetCurrentTick();
 		song_tick[bufferIndex][i] = tick;
 				
-		// °¡»ç ·¹ÄÚµå¸¦ Ã£´Â´Ù.
+		// ê°€ì‚¬ ë ˆì½”ë“œë¥¼ ì°¾ëŠ”ë‹¤.
 		Iss *m_iss = self->m_thread->GetIss();
 		if ( m_iss->IsOpened() == true )
 		{
 			for(int x=m_lastLyricsRecord; x<m_iss->m_header.rec_count; x++)
 			{
-				// °¡»ç ÆÄÀÏ¿¡´Â º»·¡ÀÇ tickÀ» 8·Î ³ª´« °ªÀÌ µé¾î°¡ ÀÖ´Ù.
+				// ê°€ì‚¬ íŒŒì¼ì—ëŠ” ë³¸ë˜ì˜ tickì„ 8ë¡œ ë‚˜ëˆˆ ê°’ì´ ë“¤ì–´ê°€ ìˆë‹¤.
 				if ( m_iss->m_record[x].kasa_tick >= tick/8 )
 				{
 					m_lastLyricsRecord = x;
@@ -395,7 +472,7 @@ void prepare_next (void *userdata, int len, int bufferIndex)
 			lyrics_buffer[bufferIndex][i] = NULL;
 		}
 
-		// ¾Öµå¸³ PCM µ¥ÀÌÅ¸¸¦ ¸¸µé¾î¼­ ¹öÆÛ¿¡ ÀúÀåÇÑ´Ù.
+		// ì• ë“œë¦½ PCM ë°ì´íƒ€ë¥¼ ë§Œë“¤ì–´ì„œ ë²„í¼ì— ì €ì¥í•œë‹¤.
 		while (to_write_len > 0) 
 		{
 			if (remain_samples > 0) 
@@ -404,29 +481,33 @@ void prepare_next (void *userdata, int len, int bufferIndex)
 			}
 			else 
 			{
-				// ºĞ´ç ¹ÚÀÚ¼ö
+				// ë¶„ë‹¹ ë°•ììˆ˜
 				int basicTempo = m_ims->GetBasicTempo();
 
 				delayTime = m_ims->PlayEvent();
 
 				MYADLIB_IMS *ims = m_ims->m_ims;
 
-				// ÃÑ ¸î°³ÀÇ ½ÜÇÃÀ» ¾µ°ÍÀÎÁö °è»êÇÑ´Ù.
-				samples = MulDiv(22050 * 60, 
+				// ì´ ëª‡ê°œì˜ ìŒ¤í”Œì„ ì“¸ê²ƒì¸ì§€ ê³„ì‚°í•œë‹¤.
+				// samples = MulDiv(22050 * 60, 
+				// 		delayTime, basicTempo * ims->header.nTickBeat);
+				samples = mul_div(44100 * 60,
 						delayTime, basicTempo * ims->header.nTickBeat);
 			}
 
 			if (samples > to_write_len) 
 			{
-				// ¾Öµå¸³ PCM µ¥ÀÌÅ¸¸¦ ¸¸µé¾î¼­ ¹öÆÛ¿¡ ÀúÀåÇÑ´Ù.
-				YM3812UpdateOne(ym3812p, pcm_buffer_pos, to_write_len);
+				// ì• ë“œë¦½ PCM ë°ì´íƒ€ë¥¼ ë§Œë“¤ì–´ì„œ ë²„í¼ì— ì €ì¥í•œë‹¤.
+//				YM3812UpdateOne(ym3812p, pcm_buffer_pos, to_write_len);
+				ym3812p->update ((short *) pcm_buffer_pos, to_write_len);
 				remain_samples = samples - to_write_len;
 				break;
 			}
 			else 
 			{
-				// ¾Öµå¸³ PCM µ¥ÀÌÅ¸¸¦ ¸¸µé¾î¼­ ¹öÆÛ¿¡ ÀúÀåÇÑ´Ù.
-				YM3812UpdateOne(ym3812p, pcm_buffer_pos, samples);
+				// ì• ë“œë¦½ PCM ë°ì´íƒ€ë¥¼ ë§Œë“¤ì–´ì„œ ë²„í¼ì— ì €ì¥í•œë‹¤.
+//				YM3812UpdateOne(ym3812p, pcm_buffer_pos, samples);
+				ym3812p->update ((short *) pcm_buffer_pos, samples);
 				remain_samples = 0;
 			}
 
@@ -437,7 +518,7 @@ void prepare_next (void *userdata, int len, int bufferIndex)
 		if ( m_playMode == STOP || m_playMode == STOPPED || 
 				m_playMode == SONG_END)
 		{
-			// Á¾·áµÈ À§Ä¡¸¦ ÀúÀå
+			// ì¢…ë£Œëœ ìœ„ì¹˜ë¥¼ ì €ì¥
 			m_endBuffer = bufferIndex;
 			m_endBufferIndex = i;
 			return;
@@ -445,61 +526,64 @@ void prepare_next (void *userdata, int len, int bufferIndex)
 	}
 }
 
-// ´ÙÀ½ »ç¿îµå°¡ ¿¬ÁÖ °¡´ÉÇÒ¶§ È£ÃâµÈ´Ù.
+// ë‹¤ìŒ ì‚¬ìš´ë“œê°€ ì—°ì£¼ ê°€ëŠ¥í• ë•Œ í˜¸ì¶œëœë‹¤.
 void callback(void *userdata, Uint8 *audio, int len)
 {
-	// ¹öÆÛ¿¡ ½Î¾Æ³õ°í PCM µ¥ÀÌÅ¸¸¦ º¸³»´Â Çü½ÄÀÌ¶ó
-	// ¹Ù·Î Ã¼Å©¸¦ ÇØ¼­´Â ¾ÈµÈ´Ù.
+	// ë²„í¼ì— ì‹¸ì•„ë†“ê³  PCM ë°ì´íƒ€ë¥¼ ë³´ë‚´ëŠ” í˜•ì‹ì´ë¼
+	// ë°”ë¡œ ì²´í¬ë¥¼ í•´ì„œëŠ” ì•ˆëœë‹¤.
 	//if ( m_playMode == STOP || m_playMode == STOPPED ) return;
+
+//	LogWrite("callback: len:%d\n", len);
 
 	MainFrame *self = (MainFrame *)userdata;
 
-	// ¿¬ÁÖÇÒ ¹öÆÛ¸¦ ¾ò´Â´Ù.
+	// ì—°ì£¼í•  ë²„í¼ë¥¼ ì–»ëŠ”ë‹¤.
 	Uint8 *buffer = pcm_buffer[m_playingBuffer]
 		[m_playingBufferIndex];
 	
-	// ÇöÀç ¿¬ÁÖÁßÀÎ Æ½
+	// í˜„ì¬ ì—°ì£¼ì¤‘ì¸ í‹±
 	int tick = song_tick[m_playingBuffer][m_playingBufferIndex];
 
-	// ÇÁ·Î±×·¹½º¹Ù ¾÷µ¥ÀÌÆ®
+	// í”„ë¡œê·¸ë ˆìŠ¤ë°” ì—…ë°ì´íŠ¸
 	self->m_slider->SetValue((float)tick);
 				
-	// °¡»ç ¾÷µ¥ÀÌÆ®
-	ISS_RECORD *record = lyrics_buffer[m_playingBuffer][m_playingBufferIndex];
-	if ( record != NULL )
-	{
-		int line = record->line;
+//	// ê°€ì‚¬ ì—…ë°ì´íŠ¸
+//	ISS_RECORD *record = lyrics_buffer[m_playingBuffer][m_playingBufferIndex];
+//	if ( record != NULL )
+//	{
+//		int line = record->line;
+//
+//		// ì†ë„ë¥¼ ìœ„í•´ ì´ë¯¸ ì¶œë ¥í–ˆë˜ ë¼ì¸ì˜ ê°€ì‚¬ëŠ” ì¶œë ¥í•˜ì§€ ì•ŠëŠ”ë‹¤.
+//		// ë¬¸ì œì ì€ ì •í™•í•œ ê°€ì‚¬ ì¶”ì ì´ ì•ˆëœë‹¤.
+//		if ( m_lastLyricsLine != line )
+//		{
+//			m_lastLyricsLine = line;
+//
+//			int from = 0;
+//			int start_x = record->start_x;
+//			int to = start_x - record->width_x;
+//
+//			Iss *m_iss = self->m_thread->GetIss();
+//			char *lyrics = m_iss->m_script[line].script;
+//
+//			if(lyrics != NULL)
+//			{
+//				//wxColour fg = wxColour(wxT("#FFFFFF"));
+//				//wxColour bg = wxColour(wxT("#A8E5F6"));
+//				//self->m_issViewer->SetRangeColour(0, to, fg, bg);
+//				self->m_issViewer->SetText(lyrics);
+//			}
+//		}
+//	}
 
-		// ¼Óµµ¸¦ À§ÇØ ÀÌ¹Ì Ãâ·ÂÇß´ø ¶óÀÎÀÇ °¡»ç´Â Ãâ·ÂÇÏÁö ¾Ê´Â´Ù.
-		// ¹®Á¦Á¡Àº Á¤È®ÇÑ °¡»ç ÃßÀûÀÌ ¾ÈµÈ´Ù.
-		if ( m_lastLyricsLine != line )
-		{
-			m_lastLyricsLine = line;
-
-			int from = 0;
-			int start_x = record->start_x;
-			int to = start_x - record->width_x;
-
-			Iss *m_iss = self->m_thread->GetIss();
-			char *lyrics = m_iss->m_script[line].script;
-
-			if(lyrics != NULL)
-			{
-				//wxColour fg = wxColour(wxT("#FFFFFF"));
-				//wxColour bg = wxColour(wxT("#A8E5F6"));
-				//self->m_issViewer->SetRangeColour(0, to, fg, bg);
-				self->m_issViewer->SetText(lyrics);
-			}
-		}
-	}
-
-	// FFT ¿¬»êÈÄ ÀÌÄş¶óÀÌÀú¸¦ ±×¸°´Ù.
+	// FFT ì—°ì‚°í›„ ì´í€¼ë¼ì´ì €ë¥¼ ê·¸ë¦°ë‹¤.
 	self->FFT((void *)buffer, len);
 	
-	// »ç¿îµå Ä«µå·Î pcm µ¥ÀÌÅ¸¸¦ º¸³»¾î ¼Ò¸®¸¦ ³½´Ù.
+	memset(audio, 0, len);
+	// ì‚¬ìš´ë“œ ì¹´ë“œë¡œ pcm ë°ì´íƒ€ë¥¼ ë³´ë‚´ì–´ ì†Œë¦¬ë¥¼ ë‚¸ë‹¤.
 	SDL_MixAudio(audio, buffer, len, m_volume);
 
-	// ¸¶Áö¸·±îÁö ¿¬ÁÖ°¡ µÇ¾ú´ÂÁö °Ë»çÇÑ´Ù.
+	// ë§ˆì§€ë§‰ê¹Œì§€ ì—°ì£¼ê°€ ë˜ì—ˆëŠ”ì§€ ê²€ì‚¬í•œë‹¤.
 	if ( m_endBuffer == m_playingBuffer &&
 		m_endBufferIndex == m_playingBufferIndex )
 	{
@@ -507,7 +591,7 @@ void callback(void *userdata, Uint8 *audio, int len)
 		return;
 	}
 	
-	// ´ÙÀ½ ¹öÆÛ¸¦ ¹Ì¸® ÁØºñÇÑ´Ù.
+	// ë‹¤ìŒ ë²„í¼ë¥¼ ë¯¸ë¦¬ ì¤€ë¹„í•œë‹¤.
 	if ( m_playingBufferIndex == 0 )
 	{
 		if ( m_playingBuffer == 0 )
@@ -518,7 +602,7 @@ void callback(void *userdata, Uint8 *audio, int len)
 
 	m_playingBufferIndex++;
 
-	// ¹öÆÛÀÇ ¸¶Áö¸·ÀÌ ¿¬ÁÖ µÇ¾úÀ¸¸é ´ÙÀ½ ¹öÆÛ·Î ±³Ã¼ÇÑ´Ù.
+	// ë²„í¼ì˜ ë§ˆì§€ë§‰ì´ ì—°ì£¼ ë˜ì—ˆìœ¼ë©´ ë‹¤ìŒ ë²„í¼ë¡œ êµì²´í•œë‹¤.
 	if ( m_playingBufferIndex == PREPARE_BUFFER_COUNT )
 	{
 		m_playingBufferIndex=0;
@@ -595,8 +679,9 @@ void MainFrame::OnLeftDClicked( wxListEvent& event)
 	info.m_col = 0;
 	info.m_mask = wxLIST_MASK_TEXT;
 	
-	// ±âÁ¸ ¾ÆÀÌÄÜ Á¦°Å	
-	m_playList->SetItemColumnImage(m_playingItem, 1, 0);
+	// ê¸°ì¡´ ì•„ì´ì½˜ ì œê±°
+	if( m_playingItem >= 0 )
+		m_playList->SetItemColumnImage(m_playingItem, 1, 0);
 	
 	if ( m_playList->GetItem(info) )
 	{
@@ -712,8 +797,9 @@ void MainFrame::Play(long item)
 		if ( m_playMode == PLAYING )
 			Stop();
 
-		// ±âÁ¸ ¾ÆÀÌÄÜ Á¦°Å	
-		m_playList->SetItemColumnImage(m_playingItem, 1, 0);
+		// ê¸°ì¡´ ì•„ì´ì½˜ ì œê±°
+		if( m_playingItem >= 0 )
+			m_playList->SetItemColumnImage(m_playingItem, 1, 0);
 
 		m_playingItem = item;
 		m_playList->SetItemColumnImage(m_playingItem, 1, 1);
@@ -757,7 +843,7 @@ void MainFrame::Play(wxString imsFile)
 
 	Bnk *bnk = new Bnk();
 
-	// ¹ğÅ© ÆÄÀÏ°ú ¾Ç±â °¹¼ö Ç¥½Ã
+	// ë±…í¬ íŒŒì¼ê³¼ ì•…ê¸° ê°¯ìˆ˜ í‘œì‹œ
 	if ( wxFileName::FileExists(bnkFile) == false )
 	{
 		bnkFile = wxT("STANDARD.BNK");
@@ -775,7 +861,7 @@ void MainFrame::Play(wxString imsFile)
 
 	delete bnk;
 
-	// °¡»ç À¯¹« Ã¼Å©
+	// ê°€ì‚¬ ìœ ë¬´ ì²´í¬
 	if ( wxFileName::FileExists(issFile) == false )
 	{
 		m_statusBar->SetStatusText(wxT("No Lyrics."), 2);
@@ -860,3 +946,4 @@ wxBitmap wxGetBitmapFromMemory(const void * data, size_t length)
 	wxImage image(stream);
 	return wxBitmap(image);
 }
+

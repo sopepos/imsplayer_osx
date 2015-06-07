@@ -1,5 +1,7 @@
 #include "Main.h"
 
+#include "debuglog.h"
+
 #include "bmp/meter.h"
 #include "bmp/play_mode_normal.h"
 #include "bmp/play_mode_normal_hover.h"
@@ -57,23 +59,37 @@ PeakMeter::PeakMeter(
 	m_repeatButton= NULL;
 	m_playModeButton= NULL;
 
+	m_resized = false;
+
 	SetBackgroundStyle(wxBG_STYLE_CUSTOM);
 	InitData();
 }
 
 void PeakMeter::OnSize(wxSizeEvent& event)
 {
-    bool bIsRunning = IsStarted();
-    
-	if ( bIsRunning )
-        Stop();
+//    bool bIsRunning = IsStarted();
+//    
+//	if ( bIsRunning )
+//        Stop();
 
-	wxAutoBufferedPaintDC  dc(this);
+/// do drawing
 
+//	// Auto-restart
+//    if ( bIsRunning )
+//		Start();// m_delay );
+
+	m_resized = true;
+	Refresh();
+
+	event.Skip();
+}
+
+void PeakMeter::OnSized( wxPaintDC& dc )
+{
 	m_colorBack.Set(wxT("#DDE1E6"));
 	dc.SetBackground(wxBrush(m_colorBack));
 	dc.Clear();
-	
+
 	wxRect rc = GetClientRect();
 
 	int rw = rc.GetWidth();
@@ -83,7 +99,7 @@ void PeakMeter::OnSize(wxSizeEvent& event)
 	wxBitmap bmp = wxGetBitmapFromMemory(meter_bmp, sizeof(meter_bmp));
 	int bw = bmp.GetWidth();
 	int bh = bmp.GetHeight();
-	
+
 	m_meterBitmapX = (rw-bw)/2;
 	m_meterBitmapY = (rh-bh)/2;
 	dc.DrawBitmap(bmp, m_meterBitmapX, m_meterBitmapY, true);
@@ -93,26 +109,26 @@ void PeakMeter::OnSize(wxSizeEvent& event)
 
 	if ( m_repeatButton == NULL )
 	{
-		wxBitmap bmp1 = wxGetBitmapFromMemory(repeat_all_bmp, 
-				sizeof(repeat_all_bmp));
+		wxBitmap bmp1 = wxGetBitmapFromMemory(repeat_all_bmp,
+											  sizeof(repeat_all_bmp));
 		wxBitmap bmp2 = wxGetBitmapFromMemory(repeat_all_hover_bmp,
-				sizeof(repeat_all_hover_bmp));
-		m_repeatButton= new GButton(this, wxID_ANY, 
-				wxDefaultPosition, bmp1, bmp2);
+											  sizeof(repeat_all_hover_bmp));
+		m_repeatButton= new GButton(this, wxID_ANY,
+									wxDefaultPosition, bmp1, bmp2);
 		m_repeatButton->SetToolTip(wxT("Choose Repeat mode (Repeat All)"));
 		Connect(m_repeatButton->GetId(), wxEVT_COMMAND_GBUTTON,
 				(wxObjectEventFunction) (wxEventFunction) &PeakMeter::OnRepeat);
 	}
 	m_repeatButton->Move(x, m_meterBitmapY+25);
-	
+
 	if ( m_playModeButton == NULL )
 	{
 		wxBitmap bmp1 = wxGetBitmapFromMemory(play_mode_normal_bmp,
-				sizeof(play_mode_normal_bmp));
-		wxBitmap bmp2 = wxGetBitmapFromMemory(play_mode_normal_hover_bmp, 
-				sizeof(play_mode_normal_hover_bmp));
-		m_playModeButton= new GButton(this, wxID_ANY, 
-				wxDefaultPosition, bmp1, bmp2);
+											  sizeof(play_mode_normal_bmp));
+		wxBitmap bmp2 = wxGetBitmapFromMemory(play_mode_normal_hover_bmp,
+											  sizeof(play_mode_normal_hover_bmp));
+		m_playModeButton= new GButton(this, wxID_ANY,
+									  wxDefaultPosition, bmp1, bmp2);
 		m_playModeButton->SetToolTip(wxT("Choose Play mode"));
 	}
 	m_playModeButton->Move(x, m_meterBitmapY+45);
@@ -125,28 +141,22 @@ void PeakMeter::OnSize(wxSizeEvent& event)
 	x = m_meterBitmapX-bw2-10;
 	if ( m_convertButton == NULL )
 	{
-		wxBitmap bmp1 = wxGetBitmapFromMemory(convert_bmp, 
-				sizeof(convert_bmp));
-		wxBitmap bmp2 = wxGetBitmapFromMemory(convert_hover_bmp, 
-				sizeof(convert_hover_bmp));
-		wxBitmap bmp3 = wxGetBitmapFromMemory(convert_clicked_bmp, 
-				sizeof(convert_clicked_bmp));
-		m_convertButton= new GButton(this, wxID_ANY, 
-				wxDefaultPosition, bmp1, bmp2, bmp3);
+		wxBitmap bmp1 = wxGetBitmapFromMemory(convert_bmp,
+											  sizeof(convert_bmp));
+		wxBitmap bmp2 = wxGetBitmapFromMemory(convert_hover_bmp,
+											  sizeof(convert_hover_bmp));
+		wxBitmap bmp3 = wxGetBitmapFromMemory(convert_clicked_bmp,
+											  sizeof(convert_clicked_bmp));
+		m_convertButton= new GButton(this, wxID_ANY,
+									 wxDefaultPosition, bmp1, bmp2, bmp3);
 	}
 	m_convertButton->Move(x, m_meterBitmapY+5);
 
 	dc.DrawBitmap(bmp, x, m_meterBitmapY+40, true);
-	
+
 	x = m_meterBitmapX+bw+10;
 	dc.DrawBitmap(bmp, x, m_meterBitmapY+5, true);
 	dc.DrawBitmap(bmp, x, m_meterBitmapY+40, true);
-    
-	// Auto-restart
-    if ( bIsRunning )
-        Start( m_delay );
-
-	Refresh();
 }
 
 void PeakMeter::OnRepeat(wxCommandEvent& WXUNUSED(event))
@@ -202,6 +212,7 @@ void PeakMeter::OnRepeatThis(wxCommandEvent& WXUNUSED(event))
 void PeakMeter::OnTimer(wxTimerEvent &event)
 {
 	//printf("timer...\n"); fflush(stdout);
+//	LogWrite("timer...");
 	DoTimerProcessing();
 }
 
@@ -256,7 +267,7 @@ void PeakMeter::InitData()
     const wxColour colYellow  = wxColour(255, 255, 0);
 
     m_showFallOff  = true;
-    m_delay        = 10;	// 10ms
+    m_delay        = 160;	// 10ms
     m_minValue     = 60;       // Min Range 0-60
     m_medValue     = 80;       // Med Range 60-80
     m_maxValue     = 100;      // Max Range 80-100
@@ -379,11 +390,13 @@ bool PeakMeter::SetData(const int ArrayValue[], int nOffset, int nSize)
     return true;
 }
 
-bool PeakMeter::Start(int delay)
+bool PeakMeter::Start() //int delay)
 {
 	if ( IsStarted() == false)
 	{
-		m_delay = delay;
+//		LogWrite("Start:\n");// %d", delay);
+
+//		m_delay = delay;
 		m_timer->Start(m_delay);
 	}
 	else
@@ -422,11 +435,19 @@ void PeakMeter::ResetControl()
 
 void PeakMeter::OnPaint(wxPaintEvent &WXUNUSED(event)) 
 {
-	DoTimerProcessing();
+	// commented by sop
+//	DoTimerProcessing();
 
-	m_timer->Notify();
-	
+	// commented by sop
+//	m_timer->Notify();
+
 	wxAutoBufferedPaintDC  dc(this);
+
+	if( m_resized )
+	{
+		OnSized( dc );
+		m_resized = false;
+	}
 
 	if ( IsStarted() )
 	{

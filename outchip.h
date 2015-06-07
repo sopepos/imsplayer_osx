@@ -5,7 +5,10 @@
 extern "C" {		// 추가
 #endif				// 추가
 
-extern void *ym3812p;
+//extern void *ym3812p;
+
+class Copl;
+extern Copl* ym3812p;
 
 void SndOutput(int addr, int dataVal);
 

@@ -180,7 +180,19 @@ void SoundWarmInit(void)
 {
 	int i;
 
-	for (i = 1; i <= 0xF5; i++)	SndOutput(i, 0);   // clear all registers
+//	for(i=1; i<=0xF5; i++)
+//	{
+//		if( i>=0x40 && i<=0x55 )
+//			SndOutput(i,0x3f);  // Total Level
+//		else
+//			SndOutput(i, 0);
+//	}
+//	SndOutput(0x01,0x20);
+//	SndOutput(0x04,0x60);
+
+	//////////////////
+	for (i = 1; i <= 0xF5; i++)
+		SndOutput(i, 0);   // clear all registers
 
 	SndOutput(4, 6);	// mask T1 & T2
 
@@ -190,7 +202,8 @@ void SoundWarmInit(void)
 		voiceNote[i] = 0;
 	}
 
-	for (i = 0; i < 11; i++) lVoiceVolume[i] = MAX_VOLUME;
+	for (i = 0; i < 11; i++)
+		lVoiceVolume[i] = MAX_VOLUME;
 
 	SetMode(0);                // melodic mode
 	SetGParam(0, 0, 0);        // init global parameters

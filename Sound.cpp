@@ -1,4 +1,5 @@
 #include "Main.h"
+#include "fdbopl/fdbopl.h"
 
 PlayThread::PlayThread(MainFrame *parent, 
 		PeakMeter *meter,
@@ -13,7 +14,7 @@ PlayThread::PlayThread(MainFrame *parent,
 
 	// BANK
 	Bnk *bnk = m_sound->GetBnk();
-	bnk->Open(bnkPath);
+	bool hasBnk = bnk->Open(bnkPath);
 
 	// IMS
 	Ims *ims = m_sound->GetIms();
@@ -38,7 +39,7 @@ PlayThread::PlayThread(MainFrame *parent,
 	// PEAK METER
     m_meter->Stop();
 	// Peak Meter 업데이트 주기
-    m_meter->Start(30);	// 30ms
+	m_meter->Start(); //30);	// 30ms
 }
 
 void PlayThread::OnExit()
@@ -51,6 +52,7 @@ void* PlayThread::Entry()
 {
 	m_playMode = PLAYING;
 	m_sound->Play();
+	return (ExitCode)0;
 }
 
 void PlayThread::Stop()
@@ -78,7 +80,9 @@ Sound::Sound(MainFrame *parent)
 {
 	this->myFrame = parent;
 
-	ym3812p = YM3812Init(3579545L, 22050);
+//	ym3812p = YM3812Init(3579545L, 44100);
+	ym3812p = new CFDBopl( 44100, false );
+
 	SoundWarmInit();
 
 	m_ims = new Ims();
@@ -94,8 +98,9 @@ Sound::~Sound()
 	delete m_bnk;
 	delete m_iss;
 	
-	YM3812Shutdown(ym3812p);
-	
+//	YM3812Shutdown(ym3812p);
+	delete ym3812p;
+
 	free_prepare_pcm_buffer (0);
 	free_prepare_pcm_buffer (1);
 }
@@ -133,11 +138,13 @@ bool Sound::Play()
 	
 	while(1)
 	{
-		wxMilliSleep(100);
-		
+//		wxMilliSleep(100);
+		usleep(100 * 1000);
+
 		if ( m_playMode == STOP )
 			break;
 	}
 
 	SDL_PauseAudio(1);
+	return true;
 }

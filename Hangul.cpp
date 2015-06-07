@@ -153,7 +153,7 @@ bool Hangul::LoadHanFont(wxString file, int htype)
 	char buf[1024];
 	strcpy( buf, (const char*)file.mb_str(wxConvUTF8) );
 	
-	handle=open(buf, O_RDWR|O_BINARY);
+	handle=open(buf, O_RDWR/*|O_BINARY*/);
 
 	read(handle,fir,hsizef[htype]);
 	read(handle,mid,hsizem[htype]);
@@ -162,6 +162,7 @@ bool Hangul::LoadHanFont(wxString file, int htype)
 	close(handle);
 
 	SetCtable(htype);
+	return true;
 }
 
 void Hangul::LoadEngFont(wxString file,int etype)
@@ -174,7 +175,7 @@ void Hangul::LoadEngFont(wxString file,int etype)
 	char buf[1024];
 	strcpy( buf, (const char*)file.mb_str(wxConvUTF8) );
 
-	handle=open(buf, O_RDWR|O_BINARY);
+	handle=open(buf, O_RDWR/*|O_BINARY*/);
 	read(handle,eng,esize[etype]);
 	close(handle);
 }
@@ -188,7 +189,7 @@ void Hangul::LoadSpecialFont(wxString file,int stype)
 	strcpy( buf, (const char*)file.mb_str(wxConvUTF8) );
 
 	stype&=0xaa;	// warning을 위한 코드이며 아무 의미 없음
-	handle=open(buf, O_RDWR|O_BINARY);
+	handle=open(buf, O_RDWR/*|O_BINARY*/);
 	read(handle,spe,ssize);
 	close(handle);
 }

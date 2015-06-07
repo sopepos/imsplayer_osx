@@ -95,7 +95,7 @@ void GHanLabel::SetRangeColour(int from, int to, wxColour fg, wxColour bg)
 
 void GHanLabel::SetLabel(char *text)
 {
-	wxPaintDC dc(this); 
+//	wxPaintDC dc(this); 
 
 	m_text = text;
 
@@ -149,7 +149,8 @@ void GHanLabel::OnMouse(wxMouseEvent &event)
 	if(event.RightUp())
 	{
 		//Alter this to give the object it's own right click properties
-		GetParent()->ProcessEvent(event); //Let right clicks bleed through to the parent.
+		//GetParent()->ProcessEvent(event); //Let right clicks bleed through to the parent.
+		GetParent()->ProcessWindowEvent(event);
 	}
 } 
 
