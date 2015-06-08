@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		85463F1E1B25DFCA00929974 /* libwx_osx_cocoa_static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85463F1B1B25DFCA00929974 /* libwx_osx_cocoa_static.a */; };
+		85463F1F1B25DFCA00929974 /* libwx_gtk3u_stc-3.0.0.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 85463F1C1B25DFCA00929974 /* libwx_gtk3u_stc-3.0.0.2.0.dylib */; };
+		85463F201B25DFCA00929974 /* libSDL2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85463F1D1B25DFCA00929974 /* libSDL2.a */; };
+		85463F231B25E02B00929974 /* resources in Resources */ = {isa = PBXBuildFile; fileRef = 85463F221B25E02B00929974 /* resources */; };
 		8579460F1B23A5BD0051E244 /* debuglog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8579460E1B23A5BD0051E244 /* debuglog.cpp */; };
-		857946111B23D79F0051E244 /* STANDARD.BNK in Resources */ = {isa = PBXBuildFile; fileRef = 857946101B23D79F0051E244 /* STANDARD.BNK */; };
 		85A82DF61B2346460009BB19 /* wxcocoa.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 85A82DF11B2346460009BB19 /* wxcocoa.xcconfig */; };
 		85A82DF71B2346460009BB19 /* wxdebug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 85A82DF21B2346460009BB19 /* wxdebug.xcconfig */; };
 		85A82DF81B2346460009BB19 /* wxrelease.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 85A82DF31B2346460009BB19 /* wxrelease.xcconfig */; };
@@ -32,15 +35,15 @@
 		85A82E391B2347DC0009BB19 /* setfreq.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85A82E261B2347DC0009BB19 /* setfreq.cpp */; };
 		85A82E3A1B2347DC0009BB19 /* SliderPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85A82E271B2347DC0009BB19 /* SliderPanel.cpp */; };
 		85A82E3B1B2347DC0009BB19 /* Sound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85A82E281B2347DC0009BB19 /* Sound.cpp */; };
-		85A82E3E1B234D130009BB19 /* libwx_gtk3u_stc-3.0.0.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 85A82E3D1B234D130009BB19 /* libwx_gtk3u_stc-3.0.0.2.0.dylib */; };
-		85A82E421B2352400009BB19 /* libwx_osx_cocoa_static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85A82E411B2352400009BB19 /* libwx_osx_cocoa_static.a */; };
-		85A82E441B23533F0009BB19 /* libSDL2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85A82E431B23533F0009BB19 /* libSDL2.a */; };
 		85A82E491B2396EF0009BB19 /* fdbopl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 85A82E471B2396EF0009BB19 /* fdbopl.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		85463F1B1B25DFCA00929974 /* libwx_osx_cocoa_static.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwx_osx_cocoa_static.a; path = lib/libwx_osx_cocoa_static.a; sourceTree = "<group>"; };
+		85463F1C1B25DFCA00929974 /* libwx_gtk3u_stc-3.0.0.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libwx_gtk3u_stc-3.0.0.2.0.dylib"; path = "lib/libwx_gtk3u_stc-3.0.0.2.0.dylib"; sourceTree = "<group>"; };
+		85463F1D1B25DFCA00929974 /* libSDL2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2.a; path = lib/libSDL2.a; sourceTree = "<group>"; };
+		85463F221B25E02B00929974 /* resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = resources; sourceTree = "<group>"; };
 		8579460E1B23A5BD0051E244 /* debuglog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = debuglog.cpp; sourceTree = "<group>"; };
-		857946101B23D79F0051E244 /* STANDARD.BNK */ = {isa = PBXFileReference; lastKnownFileType = file; path = STANDARD.BNK; sourceTree = "<group>"; };
 		85A82DEF1B23461D0009BB19 /* imsplayer_osx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = imsplayer_osx.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85A82DF11B2346460009BB19 /* wxcocoa.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = wxcocoa.xcconfig; sourceTree = "<group>"; };
 		85A82DF21B2346460009BB19 /* wxdebug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = wxdebug.xcconfig; sourceTree = "<group>"; };
@@ -85,9 +88,6 @@
 		85A82E261B2347DC0009BB19 /* setfreq.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = setfreq.cpp; sourceTree = "<group>"; };
 		85A82E271B2347DC0009BB19 /* SliderPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SliderPanel.cpp; sourceTree = "<group>"; };
 		85A82E281B2347DC0009BB19 /* Sound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sound.cpp; sourceTree = "<group>"; };
-		85A82E3D1B234D130009BB19 /* libwx_gtk3u_stc-3.0.0.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libwx_gtk3u_stc-3.0.0.2.0.dylib"; path = "/opt/local/Library/Frameworks/wxWidgets.framework/Versions/wxGTK/3.0/lib/libwx_gtk3u_stc-3.0.0.2.0.dylib"; sourceTree = "<absolute>"; };
-		85A82E411B2352400009BB19 /* libwx_osx_cocoa_static.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwx_osx_cocoa_static.a; path = /usr/local/lib/libwx_osx_cocoa_static.a; sourceTree = "<absolute>"; };
-		85A82E431B23533F0009BB19 /* libSDL2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2.a; path = /opt/local/lib/libSDL2.a; sourceTree = "<absolute>"; };
 		85A82E461B2396EF0009BB19 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 		85A82E471B2396EF0009BB19 /* fdbopl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fdbopl.cpp; sourceTree = "<group>"; };
 		85A82E481B2396EF0009BB19 /* fdbopl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fdbopl.h; sourceTree = "<group>"; };
@@ -98,9 +98,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85A82E3E1B234D130009BB19 /* libwx_gtk3u_stc-3.0.0.2.0.dylib in Frameworks */,
-				85A82E421B2352400009BB19 /* libwx_osx_cocoa_static.a in Frameworks */,
-				85A82E441B23533F0009BB19 /* libSDL2.a in Frameworks */,
+				85463F1E1B25DFCA00929974 /* libwx_osx_cocoa_static.a in Frameworks */,
+				85463F1F1B25DFCA00929974 /* libwx_gtk3u_stc-3.0.0.2.0.dylib in Frameworks */,
+				85463F201B25DFCA00929974 /* libSDL2.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,14 +110,25 @@
 		85099B891B23441D0083EA93 = {
 			isa = PBXGroup;
 			children = (
+				85463F221B25E02B00929974 /* resources */,
+				85463F211B25DFDC00929974 /* utils */,
 				85A82E4A1B239BCB0009BB19 /* fmopl */,
 				85A82E451B2396EF0009BB19 /* fdbopl */,
+				85A82E4B1B239BF50009BB19 /* ims */,
 				85A82E011B2347AF0009BB19 /* include */,
 				85A82E001B2347A10009BB19 /* src */,
-				85A82E4B1B239BF50009BB19 /* ims */,
 				85A82DFF1B2347520009BB19 /* Supporting files */,
 				85A82DFE1B2347440009BB19 /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		85463F211B25DFDC00929974 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				8579460E1B23A5BD0051E244 /* debuglog.cpp */,
+				85A82DF51B2346460009BB19 /* minimal.cpp */,
+			);
+			name = utils;
 			sourceTree = "<group>";
 		};
 		85A82DFE1B2347440009BB19 /* Products */ = {
@@ -131,12 +142,9 @@
 		85A82DFF1B2347520009BB19 /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
-				857946101B23D79F0051E244 /* STANDARD.BNK */,
-				8579460E1B23A5BD0051E244 /* debuglog.cpp */,
-				85A82DF51B2346460009BB19 /* minimal.cpp */,
-				85A82E431B23533F0009BB19 /* libSDL2.a */,
-				85A82E411B2352400009BB19 /* libwx_osx_cocoa_static.a */,
-				85A82E3D1B234D130009BB19 /* libwx_gtk3u_stc-3.0.0.2.0.dylib */,
+				85463F1B1B25DFCA00929974 /* libwx_osx_cocoa_static.a */,
+				85463F1C1B25DFCA00929974 /* libwx_gtk3u_stc-3.0.0.2.0.dylib */,
+				85463F1D1B25DFCA00929974 /* libSDL2.a */,
 				85A82DF11B2346460009BB19 /* wxcocoa.xcconfig */,
 				85A82DF21B2346460009BB19 /* wxdebug.xcconfig */,
 				85A82DF31B2346460009BB19 /* wxrelease.xcconfig */,
@@ -280,7 +288,7 @@
 			files = (
 				85A82DF61B2346460009BB19 /* wxcocoa.xcconfig in Resources */,
 				85A82DF71B2346460009BB19 /* wxdebug.xcconfig in Resources */,
-				857946111B23D79F0051E244 /* STANDARD.BNK in Resources */,
+				85463F231B25E02B00929974 /* resources in Resources */,
 				85A82DF91B2346460009BB19 /* Info_cocoa.plist in Resources */,
 				85A82DF81B2346460009BB19 /* wxrelease.xcconfig in Resources */,
 			);
@@ -441,6 +449,7 @@
 					/opt/local/Library/Frameworks/wxWidgets.framework/Versions/wxGTK/3.0/lib,
 					/usr/local/lib,
 					/opt/local/lib,
+					"$(PROJECT_DIR)/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_LDFLAGS = (
@@ -504,6 +513,7 @@
 					/opt/local/Library/Frameworks/wxWidgets.framework/Versions/wxGTK/3.0/lib,
 					/usr/local/lib,
 					/opt/local/lib,
+					"$(PROJECT_DIR)/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_LDFLAGS = (

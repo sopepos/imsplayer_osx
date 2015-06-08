@@ -267,7 +267,7 @@ void PeakMeter::InitData()
     const wxColour colYellow  = wxColour(255, 255, 0);
 
     m_showFallOff  = true;
-    m_delay        = 160;	// 10ms
+    m_delay        = 100;	// 10ms
     m_minValue     = 60;       // Min Range 0-60
     m_medValue     = 80;       // Med Range 60-80
     m_maxValue     = 100;      // Max Range 80-100
@@ -482,19 +482,23 @@ void PeakMeter::DrawBand(wxAutoBufferedPaintDC  &dc, int x, int y)
 		int bandy = y;
 	
 		// clear
-		for(int doty=0; doty<=m_ledBand; doty++)
+		dc.SetPen(clearPen);
+//		for(int doty=0; doty<=m_ledBand; doty++)
+		for(int doty=meterValue; doty<=m_ledBand; doty++)
 		{
-			for(int dotx=0; dotx<=7; dotx++)
-			{
-				if((dotx%2)==0)
-					dc.SetPen(clearPen);
-				else
-					dc.SetPen(clearPen2);
+			int sy = bandy+(-(doty*2));
+			dc.DrawLine(bandx, sy, bandx+7, sy);
 
-				int sx = bandx+dotx;
-				int sy = bandy+(-(doty*2));
-				dc.DrawPoint(sx, sy);
-			}
+//			for(int dotx=0; dotx<=7; dotx++)
+//			{
+//				if((dotx%2)==0)
+//					dc.SetPen(clearPen);
+//				else
+//					dc.SetPen(clearPen2);
+//
+//				int sx = bandx+dotx;
+//				dc.DrawPoint(sx, sy);
+//			}
 		}
 		
 		

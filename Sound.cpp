@@ -38,7 +38,7 @@ PlayThread::PlayThread(MainFrame *parent,
 	
 	// PEAK METER
     m_meter->Stop();
-	// Peak Meter ������Ʈ �ֱ�
+	// Peak Meter 업데이트 주기
 	m_meter->Start(); //30);	// 30ms
 }
 
@@ -138,11 +138,20 @@ bool Sound::Play()
 	
 	while(1)
 	{
-//		wxMilliSleep(100);
-		usleep(100 * 1000);
+		wxMilliSleep(100);
+//		usleep(100 * 1000);
 
 		if ( m_playMode == STOP )
 			break;
+
+		// 프로그레스바 업데이트
+		myFrame->UpdateProgressBar();
+
+		// 가사 업데이트
+		myFrame->UpdateISS();
+
+		// FFT 연산후 이퀼라이저를 그린다.
+		myFrame->UpdateFFTMeter();
 	}
 
 	SDL_PauseAudio(1);

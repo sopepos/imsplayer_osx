@@ -256,7 +256,7 @@ MainFrame::MainFrame(wxWindow* parent,
 
 	// NUM_FREQUENCY: 분석할 주파수 갯수
 	// 20: 각 주파수의 높이
-    m_meter->SetMeterBands(NUM_FREQUENCY, 20);
+    m_meter->SetMeterBands(NUM_FREQUENCY, FFT_METER_HEIGHT);
 	
 	sizer->Add(m_meter, 0, wxEXPAND|wxTOP, 3);
 	
@@ -538,15 +538,16 @@ void callback(void *userdata, Uint8 *audio, int len)
 	MainFrame *self = (MainFrame *)userdata;
 
 	// 연주할 버퍼를 얻는다.
-	Uint8 *buffer = pcm_buffer[m_playingBuffer]
-		[m_playingBufferIndex];
+	Uint8 *buffer = pcm_buffer[m_playingBuffer][m_playingBufferIndex];
+	self->m_currentBuffer = buffer;
 	
 	// 현재 연주중인 틱
 	int tick = song_tick[m_playingBuffer][m_playingBufferIndex];
+	self->m_currentTick = tick;
 
-	// 프로그레스바 업데이트
-	self->m_slider->SetValue((float)tick);
-				
+//	// 프로그레스바 업데이트
+//	self->m_slider->SetValue((float)tick);
+
 //	// 가사 업데이트
 //	ISS_RECORD *record = lyrics_buffer[m_playingBuffer][m_playingBufferIndex];
 //	if ( record != NULL )
@@ -576,9 +577,9 @@ void callback(void *userdata, Uint8 *audio, int len)
 //		}
 //	}
 
-	// FFT 연산후 이퀼라이저를 그린다.
-	self->FFT((void *)buffer, len);
-	
+//	// FFT 연산후 이퀼라이저를 그린다.
+//	self->FFT((void *)buffer, len);
+
 	memset(audio, 0, len);
 	// 사운드 카드로 pcm 데이타를 보내어 소리를 낸다.
 	SDL_MixAudio(audio, buffer, len, m_volume);
@@ -612,6 +613,50 @@ void callback(void *userdata, Uint8 *audio, int len)
 		else
 			m_playingBuffer = 0;
 	}
+}
+
+// for play thread
+void MainFrame::UpdateProgressBar()
+{
+	// 프로그레스바 업데이트
+	m_slider->SetValue((float)m_currentTick);
+}
+
+void MainFrame::UpdateISS()
+{
+	// 가사 업데이트
+	ISS_RECORD *record = lyrics_buffer[m_playingBuffer][m_playingBufferIndex];
+	if ( record != NULL )
+	{
+		int line = record->line;
+
+		// 속도를 위해 이미 출력했던 라인의 가사는 출력하지 않는다.
+		// 문제점은 정확한 가사 추적이 안된다.
+		if ( m_lastLyricsLine != line )
+		{
+			m_lastLyricsLine = line;
+
+//			int from = 0;
+//			int start_x = record->start_x;
+//			int to = start_x - record->width_x;
+
+			Iss *m_iss = this->m_thread->GetIss();
+			char *lyrics = m_iss->m_script[line].script;
+
+			if(lyrics != NULL)
+			{
+				//wxColour fg = wxColour(wxT("#FFFFFF"));
+				//wxColour bg = wxColour(wxT("#A8E5F6"));
+				//self->m_issViewer->SetRangeColour(0, to, fg, bg);
+				this->m_issViewer->SetText(lyrics);
+			}
+		}
+	}
+}
+
+void MainFrame::UpdateFFTMeter()
+{
+	FFT((void *)m_currentBuffer, PREPARE_BUFFER_SIZE);
 }
 
 #include "FFT.hpp"

@@ -5,6 +5,7 @@
 
 const int METER_FREQUENCY[] = { 30, 60, 100, 160, 240, 300, 350, 400, 440, 500, 600, 800, 1000, 1500, 2000, 2600, 3000, 4000, 6000, 8000, 10000, 14000, 16000 };
 const int NUM_FREQUENCY = sizeof(METER_FREQUENCY)/sizeof(int);
+const int FFT_METER_HEIGHT = 20;
 
 class wxString;
 class MainPanel;
@@ -104,6 +105,17 @@ public:
 	// event handlers (these functions should _not_ be virtual)
 	void OnQuit(wxCommandEvent& event);
 	void OnAbout(wxCommandEvent& event);
+
+
+	// play thread
+public:
+	void UpdateISS();
+	void UpdateProgressBar();
+	void UpdateFFTMeter();
+
+	Uint8* m_currentBuffer;
+	int m_currentTick;
+
 
 private:
 	void OnCloseApp(wxCloseEvent& WXUNUSED(event));
